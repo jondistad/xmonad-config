@@ -12,7 +12,7 @@ import qualified XMonad.Util.ExtensibleState as XS
 import           XMonad.Util.Run
 
 import           Data.Char (isDigit)
-import           System.IO
+import           System.IO (readIO)
 import           System.IO.Unsafe (unsafePerformIO)
 
 -- Backlight Brightness
@@ -20,6 +20,8 @@ import           System.IO.Unsafe (unsafePerformIO)
 newtype Brightness = Brightness Int
 instance ExtensionClass Brightness where
   initialValue = Brightness initialBrightness
+    where
+      initialBrightness = unsafePerformIO (readFile' brightnessFile >>= readIO)
   extensionType = StateExtension
 
 brightnessFile :: FilePath
@@ -36,11 +38,7 @@ updateBrightness pct = do
 
 maxBrightness :: Int
 maxBrightness = unsafePerformIO $
-  readFile' "/sys/class/backlight/intel_backlight/max_brightness" >>= return . read
-
-initialBrightness :: Int
-initialBrightness = unsafePerformIO $
-  readFile' brightnessFile >>= return . read
+  readFile' "/sys/class/backlight/intel_backlight/max_brightness" >>= readIO
 
 -- Volume
 
