@@ -25,16 +25,15 @@ import           JExt.MediaKeys
 
 myConfig =
   docks $
-    def
-      { manageHook = manageDocks <+> manageHook def
-      -- , layoutHook = myLayout
-      , handleEventHook = handleTimerEvent <+> handleEventHook def
-      , terminal = "urxvt"
-      , workspaces = myWorkspaces
-      , modMask = mod4Mask -- Rebind Mod to the Windows key
-      } `additionalKeysP`
-    myKeys `additionalKeys`
-    extraKeys
+    def { manageHook = manageDocks <+> manageHook def
+        -- , layoutHook = myLayout
+        , handleEventHook = handleTimerEvent <+> handleEventHook def
+        , terminal = "urxvt"
+        , workspaces = myWorkspaces
+        , modMask = mod4Mask -- Rebind Mod to the Windows key
+        }
+    `additionalKeysP` myKeys
+    `additionalKeys` extraKeys
 
 main = do
   xmonad =<< xmobar myConfig
