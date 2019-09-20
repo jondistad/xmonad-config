@@ -34,7 +34,7 @@ updateBrightness pct = do
   XS.put (Brightness new)
   spawn $ "echo "++show new++" > "++brightnessFile
   let newPct = round $ 100 * (fromIntegral new / fromIntegral maxBrightness)
-  osdShow ("brightness: "++show newPct++"%")
+  osdShow ("Brightness: "++show newPct++"%")
 
 maxBrightness :: Int
 maxBrightness = unsafePerformIO $
@@ -49,7 +49,7 @@ updateVolume pct = do
              else "decrease"
 
   out <- runProcessWithInput "ponymix" ["--sink", verb, show (abs pct)] ""
-  osdShow $ "Volume: "++(takeWhile isDigit out)++"%"
+  osdShow $ "Volume: "++takeWhile isDigit out++"%"
   return ()
 
 data AudioComponent = Speaker | Mic deriving (Eq, Show)
