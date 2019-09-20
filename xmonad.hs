@@ -31,6 +31,9 @@ myConfig =
         , terminal = "urxvt"
         , workspaces = myWorkspaces
         , modMask = mod4Mask -- Rebind Mod to the Windows key
+        , focusFollowsMouse = False
+        , clickJustFocuses = False
+        -- , focusedBorderColor = "#000000"
         }
     `additionalKeysP` myKeys
     `additionalKeys` extraKeys
