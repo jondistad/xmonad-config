@@ -42,4 +42,7 @@ myKeys =
   [ ("M-S-p", spawn "flameshot gui")
   , ("M-S-x", shellPrompt def { font = "xft:FantasqueSansMono:size=13" })
   , ("M-S-l", spawn "xscreensaver-command -lock")
+  , ("M-<F12>", updateVolume 4)
+  , ("M-<F11>", updateVolume (-4))
+  , ("M-<F10>", toggleMute Speaker)
   ]
